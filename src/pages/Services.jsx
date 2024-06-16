@@ -9,7 +9,8 @@ export default function Services() {
         <>
             <HomeLayouts>
                 <main>
-                    <Hero />
+                    <Hero title="Services"
+                        description="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
                     <Benefits />
                     <div className="product-section pt-0">
                         <div className="container">
@@ -23,9 +24,7 @@ export default function Services() {
                             </div>
                         </div>
                     </div>
-
                 </main>
-
             </HomeLayouts>
         </>
     )

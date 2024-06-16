@@ -8,7 +8,9 @@ export default function Shop() {
         <>
             <HomeLayouts>
                 <main>
-                    <Hero />
+                    <Hero title="Shop"
+                        description="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
+
                     <div className="untree_co-section product-section before-footer-section">
                         <div className="container">
                             <div className="row">

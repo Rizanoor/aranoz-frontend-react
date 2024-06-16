@@ -8,7 +8,9 @@ export default function Login() {
         <>
             <HomeLayouts>
                 <main>
-                    <Hero />
+                    <Hero title="Login" subtitle="Page"
+                        description="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
+
                     <div className="untree_co-section">
                         <div className="container">
                             <div className="block">
