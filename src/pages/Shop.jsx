@@ -9,9 +9,9 @@ export default function Shop() {
             <HomeLayouts>
                 <main>
                     <Hero />
-                    <div class="untree_co-section product-section before-footer-section">
-                        <div class="container">
-                            <div class="row">
+                    <div className="untree_co-section product-section before-footer-section">
+                        <div className="container">
+                            <div className="row">
                                 <CardProduct />
                             </div>
                         </div>
