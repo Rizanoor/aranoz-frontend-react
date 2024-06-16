@@ -17,15 +17,15 @@ export default function Register() {
 
                                         <form>
                                             <div className="form-group">
-                                                <label className="text-black" for="name">Name</label>
+                                                <label className="text-black" htmlFor="name">Name</label>
                                                 <input type="text" className="form-control" id="name" />
                                             </div>
                                             <div className="form-group">
-                                                <label className="text-black" for="email">Email address</label>
+                                                <label className="text-black" htmlFor="email">Email address</label>
                                                 <input type="email" className="form-control" id="email" />
                                             </div>
                                             <div className="form-group">
-                                                <label className="text-black" for="password">Password</label>
+                                                <label className="text-black" htmlFor="password">Password</label>
                                                 <input type="password" className="form-control" id="password" />
                                             </div>
                                             <br />

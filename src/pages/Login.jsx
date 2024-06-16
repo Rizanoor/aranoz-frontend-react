@@ -16,11 +16,11 @@ export default function Login() {
                                     <div className="col-md-8 col-lg-8 pb-4">
                                         <form>
                                             <div className="form-group">
-                                                <label className="text-black" for="email">Email address</label>
+                                                <label className="text-black" htmlFor="email">Email address</label>
                                                 <input type="email" className="form-control" id="email" />
                                             </div>
                                             <div className="form-group">
-                                                <label className="text-black" for="password">Password</label>
+                                                <label className="text-black" htmlFor="password">Password</label>
                                                 <input type="password" className="form-control" id="password" />
                                             </div>
                                             <br />
