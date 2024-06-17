@@ -1,14 +1,28 @@
-import React from 'react'
-import HomeLayouts from '../layouts/HomeLayouts'
-import Hero from '../components/organisems/Hero'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import HomeLayouts from '../layouts/HomeLayouts';
+import Hero from '../components/organisems/Hero';
 
 export default function Checkout() {
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        setCartItems(storedCartItems);
+    }, []);
+
+    function formatCurrency(amount) {
+        return `Rp. ${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+    }
+
     return (
         <>
             <HomeLayouts>
                 <main>
-                    <Hero title="Checkout"
-                        description="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
+                    <Hero
+                        title="Checkout"
+                        description="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique."
+                    />
                     <div className="untree_co-section">
                         <div className="container">
                             <div className="row">
@@ -19,19 +33,29 @@ export default function Checkout() {
                                             <div className="p-3 p-lg-5 border bg-white">
                                                 <table className="table site-block-order-table mb-5">
                                                     <thead>
-                                                        <th>Product</th>
-                                                        <th>Total</th>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Total</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {cartItems.map(item => (
+                                                            <tr key={item.id}>
+                                                                <td>{item.name}</td>
+                                                                <td>{formatCurrency(item.price)}</td>
+                                                            </tr>
+                                                        ))}
                                                         <tr>
-                                                            <td>test</td>
-                                                            <td>Rp. 15</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td className="text-black font-weight-bold"><strong>Order Total</strong>
+                                                            <td className="text-black font-weight-bold">
+                                                                <strong>Order Total</strong>
                                                             </td>
                                                             <td className="text-black font-weight-bold">
-                                                                <strong className="text-black">Rp. 15</strong>
+                                                                <strong>{formatCurrency(
+                                                                    cartItems.reduce(
+                                                                        (total, item) => total + item.price,
+                                                                        0
+                                                                    )
+                                                                )}</strong>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -50,5 +74,5 @@ export default function Checkout() {
                 </main>
             </HomeLayouts>
         </>
-    )
+    );
 }
