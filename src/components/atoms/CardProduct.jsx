@@ -29,6 +29,30 @@ export default function CardProduct() {
         fetchProducts();
     }, []);
 
+
+    const addToCart = (productId) => {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        
+        const existingItem = cartItems.find(item => item.id === productId);
+        if (existingItem) {
+            alert('Product is already in cart!');
+            return;
+        }
+
+        const productToAdd = products.find(product => product.id === productId);
+        if (productToAdd) {
+            cartItems.push({
+                id: productToAdd.id,
+                name: productToAdd.name,
+                price: productToAdd.price,
+                image: productToAdd.galleries[0].photos
+            });
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            alert('Product added to cart!');
+        }
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -38,14 +62,14 @@ export default function CardProduct() {
             {Array.isArray(products) && products.length > 0 ? (
                 products.map(product => (
                     <div className="col-12 col-md-4 col-lg-3 mb-5" key={product.id}>
-                        <a className="product-item" href="#">
-                        <img src={`${import.meta.env.VITE_STORAGE_BASE_URL}/${product.galleries[0].photos}`} className="img-fluid product-thumbnail" alt={product.name} />
-                        <h3 className="product-title">{product.name}</h3>
+                        <div className="product-item">
+                            <img src={`${import.meta.env.VITE_STORAGE_BASE_URL}/${product.galleries[0].photos}`} className="img-fluid product-thumbnail" alt={product.name} />
+                            <h3 className="product-title">{product.name}</h3>
                             <strong className="product-price">{formatCurrency(product.price)}</strong>
-                            <span className="icon-cross">
+                            <span className="icon-cross" onClick={() => addToCart(product.id)}>
                                 <img src={cross} className="img-fluid" alt="Cross Icon" />
                             </span>
-                        </a>
+                        </div>
                     </div>
                 ))
             ) : (
