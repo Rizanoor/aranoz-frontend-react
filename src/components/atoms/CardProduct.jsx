@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import productPlaceholder from "../../assets/images/product-2.png";
 import cross from "../../assets/images/cross.svg";
 
 export default function CardProduct() {
