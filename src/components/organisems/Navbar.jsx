@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import user from "../../assets/images/user.svg";
 import cart from "../../assets/images/cart.svg";
-import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+    const [userName, setUserName] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedName = localStorage.getItem('name');
+        if (storedName) {
+            setUserName(storedName);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('token_type');
+        localStorage.removeItem('name');
+        localStorage.removeItem('email');
+        
+        navigate('/login');
+    };
+
     return (
         <>
             <nav className="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
@@ -32,13 +51,23 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                            <li>
-                                <a className="nav-link">
-                                    <img src={user} alt="User" />
-                                </a>
+                            <li className="nav-item dropdown">
+                                {userName ? (
+                                    <div className="dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Welcome, {userName}
+                                        </a>
+                                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    <Link to="/login" className="nav-link">
+                                        <img src={user} alt="User" />
+                                    </Link>
+                                )}
                             </li>
-                            
-                            <li>
+                            <li className="nav-item">
                                 <Link to="/cart" className="nav-link">
                                     <img src={cart} alt="Cart" />
                                 </Link>
@@ -48,5 +77,5 @@ export default function Navbar() {
                 </div>
             </nav>
         </>
-    )
+    );
 }
